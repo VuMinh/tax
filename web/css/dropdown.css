@@ -1,0 +1,54 @@
+.my-ul li{
+    list-style: none;
+    margin: 20px 0;
+}
+.clear-fix{
+    margin: 10px 0;
+}
+
+.control-label{
+    font-size: 12px;
+}
+
+code{
+    font-size: 13px;
+}
+
+#side-menu li img{
+    margin-right: 5px;
+}
+
+#side-menu li a{
+    color: #0f0f0f;
+}
+
+.panel-heading{
+    background: lightblue;
+}
+
+.my-load {
+    position: fixed;
+    z-index: 1000000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0) url(../images/default.gif) 50% 50% no-repeat;
+    background-size: 5%;
+}
+
+/*.zindex {*/
+    /*z-index: 1;*/
+/*}*/
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .my-load {
+    display: block;
+}

@@ -1,0 +1,45 @@
+version: "2"
+
+services:
+    mariadb:
+        image: mariadb:10.3
+        ports:
+            - "3306:3306"
+        networks:
+            - tax_vlan
+        environment:
+            - MYSQL_ROOT_PASSWORD=taxRootPass
+        volumes:
+            - ./mariadb/:/docker-entrypoint-initdb.d/
+        hostname: mariadb
+        domainname: mariadb.lan
+        restart: always
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - "8080:80"
+        networks:
+            - tax_vlan
+        depends_on:
+            - mariadb
+        environment:
+            - PMA_HOST=mariadb
+            - PHP_UPLOAD_MAX_FILESIZE=64M
+            - PHP_MAX_INPUT_VARS=2000
+        hostname: phpmyadmin
+        domainname: phpmyadmin.lan
+        restart: always
+    pktax:
+        build: ../.
+        ports:
+            - "80:80"
+        networks:
+            - tax_vlan
+        environment:
+            - MYSQL_ROOT_PASSWORD=taxRootPass
+            - MYSQL_HOST_ADDR=mariadb
+        hostname: pktax
+        domainname: pktax.lan
+        restart: always
+networks:
+    tax_vlan:
